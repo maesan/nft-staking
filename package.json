@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.1.1",
+    "dotenv": "^16.0.2",
+    "ethers": "^5.7.1",
+    "hardhat": "^2.11.2",
+    "hardhat-abi-exporter": "^2.10.0"
+  }
+}

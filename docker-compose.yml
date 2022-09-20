@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  node:
+    container_name: node18
+    build: .
+    image: node18
+    volumes:
+      - ./:/code
+    command: bash -c "npm install && /bin/bash"
+    tty: true
