@@ -1,10 +1,5 @@
 [
   {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -15,12 +10,12 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "uint8",
         "name": "amount",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
-    "name": "Deposited",
+    "name": "BuyNFT",
     "type": "event"
   },
   {
@@ -29,44 +24,26 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "_rewardToken",
+        "name": "_nftContract",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_nftTokenId",
+        "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "_stakedNftAddress",
+        "name": "_token",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_stakedNftTokenId",
+        "name": "_sellPrice",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_stakedNftValue",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_rewardStartTime",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_rewardEndTime",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint16",
-        "name": "_apr",
-        "type": "uint16"
       }
     ],
     "name": "Initialized",
@@ -92,87 +69,107 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "apr",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "apr_denominator",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "claim",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "amount",
+        "type": "uint8"
+      }
+    ],
+    "name": "SellNFT",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "amount",
+        "type": "uint8"
+      }
+    ],
+    "name": "WithdrawNFT",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
       }
     ],
-    "name": "deposit",
+    "name": "WithdrawToken",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "_amount",
+        "type": "uint8"
+      }
+    ],
+    "name": "buyNFT",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getNFTInfo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "_nftContract",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_nftTokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_sellPrice",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "address",
-        "name": "_rewardToken",
+        "name": "_nftContract",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_nftTokenId",
+        "type": "uint256"
       },
       {
         "internalType": "address",
-        "name": "_stakedNftAddress",
+        "name": "_token",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "_stakedNftTokenId",
+        "name": "_sellPrice",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_stakedNftValue",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_rewardStartTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_rewardEndTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint16",
-        "name": "_apr",
-        "type": "uint16"
       }
     ],
     "name": "initialize",
@@ -188,6 +185,32 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nftContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nftTokenId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -285,25 +308,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "pendingReward",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "reward",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -311,73 +315,21 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "rewardEndTime",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "uint8",
+        "name": "_amount",
+        "type": "uint8"
       }
     ],
-    "stateMutability": "view",
+    "name": "sellNFT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "rewardStartTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "rewardToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stakedNft",
-    "outputs": [
-      {
-        "internalType": "contract IERC1155",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stakedNftTokenId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stakedNftValue",
+    "name": "sellPrice",
     "outputs": [
       {
         "internalType": "uint256",
@@ -408,6 +360,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "token",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -423,17 +388,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_address",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "_price",
         "type": "uint256"
       }
     ],
-    "name": "updateNftInfo",
+    "name": "updateSellPrice",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -441,51 +401,19 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "internalType": "uint8",
+        "name": "_amount",
+        "type": "uint8"
       }
     ],
-    "name": "userInfo",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "addr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "numOfstakedNft",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "rewardLocked",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lastDeposited",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "withdrawNFT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdraw",
+    "inputs": [],
+    "name": "withdrawSales",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
