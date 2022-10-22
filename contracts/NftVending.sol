@@ -106,9 +106,8 @@ contract NftVending is Ownable, IERC1155Receiver {
         require(price <= IERC20(token).balanceOf(address(this)),
             "insufficient balance"
         );
-        // transfer token to user from contract
-        IERC20(token).transferFrom(
-            address(this),
+
+        IERC20(token).transfer(
             msg.sender,
             price
         );
